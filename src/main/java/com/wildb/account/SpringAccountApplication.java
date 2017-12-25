@@ -8,10 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
 @SpringBootApplication
-public class SpringVueDemoApplication {
+public class SpringAccountApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringVueDemoApplication.class, args);
+		SpringApplication.run(SpringAccountApplication.class, args);
 	}
 
 	@Bean
