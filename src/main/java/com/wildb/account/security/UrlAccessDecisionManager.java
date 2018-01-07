@@ -26,16 +26,21 @@ public class UrlAccessDecisionManager implements AccessDecisionManager {
         HttpServletRequest request = ((FilterInvocation) object).getHttpRequest();
         String url, method;
         if ("anonymousUser".equals(authentication.getPrincipal())
-                || matchers("/images/**", request)
-                || matchers("/js/**", request)
-                || matchers("/css/**", request)
-                || matchers("/fonts/**", request)
-                || matchers("/", request)
-                || matchers("/index.html", request)
+                || matchers("/static/img/**", request)
+                || matchers("/static/js/**", request)
+                || matchers("/static/assets/**",request)
+                || matchers("/static/css/**", request)
+                || matchers("/static/fonts/**", request)
+//                || matchers("/index.html", request)
                 || matchers("/favicon.ico", request)
-                || matchers("/login", request)) {
+//                || matchers("/", request)
+                || matchers("/login",request)
+               ) {
             return;
         } else {
+            if(matchers("/",request)){ //用户登录后如果是访问首页，则通过
+                return;
+            }
             for (GrantedAuthority ga : authentication.getAuthorities()) {
                 if (ga instanceof UrlGrantedAuthority) {
                     UrlGrantedAuthority urlGrantedAuthority = (UrlGrantedAuthority) ga;

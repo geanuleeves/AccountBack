@@ -16,16 +16,28 @@ import javax.annotation.Resource;
 public class LoginController {
     @Resource
     UserService userService;
-
-    @RequestMapping(value = "/login")
-    @ResponseBody
-    public Object login(@AuthenticationPrincipal User loginedUser, @RequestParam(name = "logout", required = false) String logout) {
-        if (logout != null) {
-            return null;
-        }
-        if (loginedUser != null) {
-            return userService.getById(loginedUser.getId());
-        }
-        return null;
-    }
+//
+//    @RequestMapping(value = "/login?error")
+//    public String loginErr(){
+//
+//
+//        return "登录失败！";
+//    }
+//
+//    @RequestMapping(value = "/login?logout")
+//    public String loginOut(){
+//
+//        return "退出登录！";
+//    }
+//    @RequestMapping(value = "/login")
+//    @ResponseBody
+//    public Object login(@AuthenticationPrincipal User loginedUser, @RequestParam(name = "logout", required = false) String logout) {
+//        if (logout != null) {
+//            return null;
+//        }
+//        if (loginedUser != null) {
+//            return userService.getById(loginedUser.getId());
+//        }
+//        return null;
+//    }
 }

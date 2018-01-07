@@ -1,13 +1,22 @@
 package com.wildb.account.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.wildb.account.security.UrlGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.io.Serializable;
+import java.util.*;
 
-public class User implements UserDetails {
+/**
+ * thymeleaf可以通过两种方式获取user数据：
+ * 1、 <span sec:authentication="principal.email"></span>
+ * 2、<ul th:each="authorityName:${#authorization.authentication.principal.authorityNames}">
+        <li th:text="${authorityName}"></li>
+      </ul>
+ */
+public class User implements UserDetails,Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String cnname;
     private String username;
@@ -19,10 +28,14 @@ public class User implements UserDetails {
     @JsonIgnore
     private String telephone;
     private String mobilePhone;
-    private List<? extends GrantedAuthority> authorities;
+    private List<? extends GrantedAuthority> authorities;  //此处authorities由UrlGrantedAuthority定义
     private Role role;
     private Integer roleId;
 
+    private List<UrlGrantedAuthority> authorityList;
+    private List<String> authorityNames;
+
+    private Set<String> roleNames;
 
     @Override
     @JsonIgnore
@@ -52,8 +65,17 @@ public class User implements UserDetails {
         this.username = username;
     }
 
+    //添加用户权限、用户角色信息
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        this.authorityList = (List<UrlGrantedAuthority>) authorities;
+        this.authorityNames = new ArrayList<>(authorities.size());
+        this.roleNames = new HashSet<>(authorities.size());
+
+        for (int i = 0; i < authorityList.size(); i++) {
+            this.authorityNames.add(authorityList.get(i).getAuthority());
+            this.roleNames.add(authorityList.get(i).getRole());
+        }
         return authorities;
     }
 
@@ -155,5 +177,17 @@ public class User implements UserDetails {
                 ", telephone=" + telephone +
                 ", mobilePhone=" + mobilePhone +
                 '}';
+    }
+
+    public List<UrlGrantedAuthority> getAuthorityList() {
+        return authorityList;
+    }
+
+    public List<String> getAuthorityNames() {
+        return authorityNames;
+    }
+
+    public Set<String> getRoleNames() {
+        return roleNames;
     }
 }

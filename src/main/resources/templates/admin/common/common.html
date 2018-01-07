@@ -1,0 +1,61 @@
+
+<link href="../../../static/css/bootstrap.min.css" rel="stylesheet" xmlns:th="http://www.w3.org/1999/xhtml">
+<link href="../../../static/css/bootstrap-reset.css" rel="stylesheet">
+
+<link href="../../../static/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="../../../static/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+<link rel="stylesheet" href="../../../static/css/owl.carousel.css" type="text/css">
+
+<link href="../../../static/css/style.css" rel="stylesheet">
+<link href="../../../static/css/style-responsive.css" rel="stylesheet" />
+
+<template xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.w3.org/1999/xhtml">
+    <header class="header white-bg" >
+        <div class="sidebar-toggle-box">
+            <div data-original-title="Toggle Navigation" data-placement="right" class="icon-reorder tooltips"></div>
+        </div>
+        <!--logo start-->
+        <a href="#" class="logo" >小新<span>理财</span></a>
+        <div class="top-nav ">
+            <ul class="nav pull-right top-menu">
+                <!--<li>-->
+                    <!--<input type="text" class="form-control search" placeholder="Search">-->
+                <!--</li>-->
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <img alt="" src="../../../static/img/avatar1_small.jpg">
+                        <!--<span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span>-->
+                        <span sec:authentication="principal.cnname"></span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                        <li><a th:href="@{/admin/profile}"><i class=" icon-suitcase"></i>查看资料</a></li>
+                        <li><a th:href="@{/admin/profile-edit}"><i class="icon-cog"></i> 个人设置</a></li>
+                        <li><a th:href="@{/admin/}"><i class="icon-bell-alt"></i><span sec:authentication="principal.id"></span></a></li>
+                        <li><a th:href="@{/logout}"><i class="icon-key"></i> 登出</a></li>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+        </div>
+    </header>
+
+</template>
+
+
+
+<script>
+    // importDoc 是导入文档的引用
+    var importDoc = document.currentScript.ownerDocument;
+
+    // mainDoc 是主文档(包含导入的页面)的引用
+    var mainDoc = document;
+
+    // 获取导入中的第一个样式表，复制，
+    // 将它附加到主文档中。
+    var styles = importDoc.querySelector('link[rel="stylesheet"]');
+    mainDoc.head.appendChild(styles.cloneNode(true));
+
+</script>
