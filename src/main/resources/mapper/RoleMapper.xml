@@ -12,8 +12,7 @@
 
     <select id="selectRolesByUserId" resultType="com.wildb.account.entity.Role" parameterType="int">
         SELECT
-            r.*,
-            u.username
+            r.*
         FROM
             role r
             LEFT JOIN user_role ur ON r.id = ur.role_id

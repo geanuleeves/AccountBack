@@ -6,6 +6,9 @@ import com.wildb.account.entity.User;
 import com.wildb.account.mapper.PermissionMapper;
 import com.wildb.account.mapper.RoleMapper;
 import com.wildb.account.mapper.UserMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.exceptions.TooManyResultsException;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,6 +24,7 @@ import java.util.List;
  * Created by yangyibo on 17/2/7.
  */
 @Service
+@Slf4j
 public class UrlUserService implements UserDetailsService {
     @Resource
     private UserMapper userMapper;
@@ -35,21 +39,25 @@ public class UrlUserService implements UserDetailsService {
     public UserDetails loadUserByUsername(String userName) { //重写loadUserByUsername 方法获得 userdetails 类型用户
 
         User user = this.userMapper.getByUserName(userName);
-        Role role = null;
+        List<Role> roles = null;
         if (user != null) {
+            roles = this.roleMapper.selectRolesByUserId(user.getId());
+            Assert.notEmpty(roles,"当前用户账号为："+user.getUsername() + " ，用户角色为空");
+
             List<Permission> permissions = this.permissionMapper.getByUserId(user.getId());
             Assert.notEmpty(permissions,"当前用户账号为："+user.getUsername() + "，用户权限为空");
+
             List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
             for (Permission permission : permissions) {
                 if (permission != null && permission.getName()!=null) {
-                    role = this.roleMapper.selectRoleByPermissionIdAndUserId(permission.getId(),user.getId());
-                    Assert.notNull(role,"当前用户账号为："+user.getUsername() + ", 权限名为："+permission.getName()+" ，所对应的用户角色为空");
-//                    GrantedAuthority grantedAuthority = new UrlGrantedAuthority(permission.getName(),permission.getPermissionUrl(),permission.getMethod());
-                    Assert.notNull(role.getName(),"当前用户账号为："+user.getUsername() + ", 权限名为："+permission.getName()+" ，所对应的用户角色名称为空");
-                    GrantedAuthority grantedAuthority = new UrlGrantedAuthority(permission.getPermissionUrl(),permission.getMethod(),permission.getName(),role.getName());
+
+                    GrantedAuthority grantedAuthority = new UrlGrantedAuthority(permission.getName(),permission.getPermissionUrl(),permission.getMethod());
                     grantedAuthorities.add(grantedAuthority);
                 }
             }
+
+            user.setPermissions(permissions);
+            user.setRoles(roles);
             user.setGrantedAuthorities(grantedAuthorities);
             return user;
         } else {

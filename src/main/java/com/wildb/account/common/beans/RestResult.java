@@ -1,4 +1,4 @@
-package com.wildb.account.entity;
+package com.wildb.account.common.beans;
 
 /**
  * 统一封装API返回信息

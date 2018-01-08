@@ -29,13 +29,8 @@ public class User implements UserDetails,Serializable {
     private String telephone;
     private String mobilePhone;
     private List<? extends GrantedAuthority> authorities;  //此处authorities由UrlGrantedAuthority定义
-    private Role role;
-    private Integer roleId;
-
-    private List<UrlGrantedAuthority> authorityList;
-    private List<String> authorityNames;
-
-    private Set<String> roleNames;
+    private List<Permission> permissions;
+    private List<Role> roles;
 
     @Override
     @JsonIgnore
@@ -68,14 +63,6 @@ public class User implements UserDetails,Serializable {
     //添加用户权限、用户角色信息
     @JsonIgnore
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        this.authorityList = (List<UrlGrantedAuthority>) authorities;
-        this.authorityNames = new ArrayList<>(authorities.size());
-        this.roleNames = new HashSet<>(authorities.size());
-
-        for (int i = 0; i < authorityList.size(); i++) {
-            this.authorityNames.add(authorityList.get(i).getAuthority());
-            this.roleNames.add(authorityList.get(i).getRole());
-        }
         return authorities;
     }
 
@@ -151,21 +138,6 @@ public class User implements UserDetails,Serializable {
         this.historyPassword = historyPassword;
     }
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
-    }
     @Override
     public String toString() {
         return "User{" +
@@ -179,15 +151,21 @@ public class User implements UserDetails,Serializable {
                 '}';
     }
 
-    public List<UrlGrantedAuthority> getAuthorityList() {
-        return authorityList;
+
+    public List<Permission> getPermissions() {
+        return permissions;
     }
 
-    public List<String> getAuthorityNames() {
-        return authorityNames;
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
-    public Set<String> getRoleNames() {
-        return roleNames;
+    public List<Role> getRoles() {
+        return roles;
     }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
 }

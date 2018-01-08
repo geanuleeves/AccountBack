@@ -9,6 +9,9 @@
 <link href="../../../static/css/style.css" rel="stylesheet">
 <link href="../../../static/css/style-responsive.css" rel="stylesheet" />
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
 <template xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.w3.org/1999/xhtml">
     <header class="header white-bg" >
         <div class="sidebar-toggle-box">
@@ -33,7 +36,7 @@
                         <div class="log-arrow-up"></div>
                         <li><a th:href="@{/admin/profile}"><i class=" icon-suitcase"></i>查看资料</a></li>
                         <li><a th:href="@{/admin/profile-edit}"><i class="icon-cog"></i> 个人设置</a></li>
-                        <li><a th:href="@{/admin/}"><i class="icon-bell-alt"></i><span sec:authentication="principal.id"></span></a></li>
+                        <li><a th:href="@{/admin/profile-activity}"><i class="icon-bell-alt"></i><span>修改密码</span></a></li>
                         <li><a th:href="@{/logout}"><i class="icon-key"></i> 登出</a></li>
                     </ul>
                 </li>

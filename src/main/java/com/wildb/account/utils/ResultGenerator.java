@@ -1,8 +1,8 @@
 package com.wildb.account.utils;
 
 
-import com.wildb.account.entity.RestResult;
-import com.wildb.account.entity.ResultCode;
+import com.wildb.account.common.beans.RestResult;
+import com.wildb.account.common.beans.ResultCode;
 import org.springframework.stereotype.Component;
 
 /**

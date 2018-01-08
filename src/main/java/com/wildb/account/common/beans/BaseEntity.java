@@ -1,4 +1,4 @@
-package com.wildb.account.entity;
+package com.wildb.account.common.beans;
 
 import java.io.Serializable;
 import java.util.Date;

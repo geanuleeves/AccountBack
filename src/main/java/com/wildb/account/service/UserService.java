@@ -1,27 +1,19 @@
 package com.wildb.account.service;
 
+import com.wildb.account.common.beans.ResultBean;
 import com.wildb.account.entity.User;
-import com.wildb.account.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.security.core.session.SessionRegistry;
-import org.springframework.stereotype.Service;
+public interface UserService{
 
-import javax.annotation.Resource;
+    /**
+     * 更新系统用户信息
+     * @param user
+     * @return
+     */
+    public int renewUser(User user);
 
-
-@Service
-public class UserService {
-//	@Resource
-//	private SessionRegistry sessionRegistry;
-
-	@Resource
-	private UserMapper userMapper;
-
-	public User getById(Integer id) {
-		User user = userMapper.getById(id);
-		return user;
-	}
-	
-
+    /**
+     * 根据用户ID获取用户信息
+     */
+    public User getById(Integer id);
 }

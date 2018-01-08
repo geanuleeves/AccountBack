@@ -1,4 +1,4 @@
-package com.wildb.account.entity;
+package com.wildb.account.common.beans;
 
 /**
  * 响应码枚举，参考HTTP状态码的语义
