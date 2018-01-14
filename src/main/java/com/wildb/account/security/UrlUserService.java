@@ -7,8 +7,6 @@ import com.wildb.account.mapper.PermissionMapper;
 import com.wildb.account.mapper.RoleMapper;
 import com.wildb.account.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.exceptions.TooManyResultsException;
-import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

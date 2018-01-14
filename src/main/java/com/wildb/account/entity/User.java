@@ -1,12 +1,12 @@
 package com.wildb.account.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.wildb.account.security.UrlGrantedAuthority;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * thymeleaf可以通过两种方式获取user数据：

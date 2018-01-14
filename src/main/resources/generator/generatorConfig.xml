@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.wildb.account.common.utils.MyMapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+            <property name="forceAnnotation" value="true"/>
+            <property name="beginningDelimiter" value="`"/>
+            <property name="endingDelimiter" value="`"/>
+        </plugin>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/account"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.wildb.account.entity" targetProject="/Users/wild._b/Work/CodeProjects/IDEAProjects/AccountProject/AccountBack/src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper"  targetProject="/Users/wild._b/Work/CodeProjects/IDEAProjects/AccountProject/AccountBack/src/main/resources"/>
+
+        <javaClientGenerator targetPackage="com.wildb.account.mapper" targetProject="/Users/wild._b/Work/CodeProjects/IDEAProjects/AccountProject/AccountBack/src/main/java" type="XMLMAPPER" />
+
+        <table tableName="%" >
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>

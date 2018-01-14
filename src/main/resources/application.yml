@@ -6,7 +6,7 @@ server:
 spring:
   profiles:
     active: dev
-  datasource: # set database config
+  datasource: # set database generator
     url: jdbc:mysql://localhost:3306/account?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: root
@@ -60,7 +60,7 @@ spring:
   encoding:
      force: true
 
-  # Thymeleaf view template config
+  # Thymeleaf view template generator
   # disable cache for dev
   # 配置和此项目无关，主要为设置thymeleaf 不严格检查HTML5
   thymeleaf:
@@ -80,7 +80,7 @@ spring:
 #  path: var/log
 # 日志级别 TRACE < DEBUG < INFO < WARN < ERROR < FATAL
 #logging: # 配置日志文件的配置方式  logback-spring.* 也为spring的默认命名规则
-#  config: logback.xml
+#  generator: logback.xml
 
 
 ## Mybatis 配置

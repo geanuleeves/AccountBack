@@ -19,7 +19,7 @@
 
 所以把下面的查询代码修改一下，用 实现了 Serializable 的 ArrayList 包装返回。
 
-@Cacheable("config")
+@Cacheable("generator")
 @Override
 public Collection<Config> getAll() {
   System.out.println("\n----------GetAll----------\n");
@@ -28,7 +28,7 @@ public Collection<Config> getAll() {
 
 @CacheEvict(value = CacheNames.CONFIG, allEntries = true)
 @Override
-public long add(Config config) {
+public long add(Config generator) {
 
 }
 
@@ -59,7 +59,7 @@ public class ClearCacheTask {
 redis 怎么样保存cache
 增加2条数据，一个是类型为 zset 的 缓存名~keys , 里面存放了该缓存所有的key， 一个是对应的key，值为序列化后的json。
 
-zset 是带权重的有序集合，可以使用 zrange config~keys -1 1 withscores 查看元素，新加入的都是 0.0 。使用 zcount config~keys -1 1 查看个数。
+zset 是带权重的有序集合，可以使用 zrange generator~keys -1 1 withscores 查看元素，新加入的都是 0.0 。使用 zcount generator~keys -1 1 查看个数。
 
 可以使用 ttl 命令查看超时时间，单位为秒。
 

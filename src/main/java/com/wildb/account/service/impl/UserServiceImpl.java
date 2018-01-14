@@ -1,12 +1,8 @@
 package com.wildb.account.service.impl;
 
-import com.wildb.account.common.beans.ResultBean;
 import com.wildb.account.entity.User;
 import com.wildb.account.mapper.UserMapper;
 import com.wildb.account.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

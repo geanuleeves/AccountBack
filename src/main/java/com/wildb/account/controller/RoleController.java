@@ -1,14 +1,12 @@
 package com.wildb.account.controller;
 
 import com.wildb.account.common.beans.ResultBean;
-import com.wildb.account.common.utils.Assert;
 import com.wildb.account.entity.Role;
 import com.wildb.account.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;

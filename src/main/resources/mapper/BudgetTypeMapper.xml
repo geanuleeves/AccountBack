@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wildb.account.mapper.BudgetTypeMapper">
+  <resultMap id="BaseResultMap" type="com.wildb.account.entity.BudgetType">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="CHAR" property="id" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+    <result column="bill_type_id" jdbcType="CHAR" property="billTypeId" />
+    <result column="budget_amount" jdbcType="DECIMAL" property="budgetAmount" />
+    <result column="budget_name" jdbcType="CHAR" property="budgetName" />
+    <result column="budget_id" jdbcType="CHAR" property="budgetId" />
+  </resultMap>
+</mapper>

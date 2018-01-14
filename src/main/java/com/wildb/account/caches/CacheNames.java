@@ -7,5 +7,5 @@ package com.wildb.account.caches;
  */
 public interface CacheNames {
 
-	String CONFIG = "config";
+	String CONFIG = "generator";
 }
