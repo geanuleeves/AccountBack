@@ -9,5 +9,13 @@ public interface RoleService {
     /**
      * 获取用户角色集合
      */
-    public List<Role> getRoles();
+    List<Role> getRoles();
+
+    Role findRoleById(Integer id);
+
+    void deleteRoleById(Integer id);
+
+    void updateRole(Role role);
+
+    void addRole(Role role);
 }

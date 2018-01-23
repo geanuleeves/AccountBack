@@ -3,7 +3,11 @@ package com.wildb.account.common.utils;
 /**
  * Created by yangyibo on 17/2/7.
  */
+import io.swagger.models.auth.In;
+
 import java.security.MessageDigest;
+import java.util.Random;
+import java.util.UUID;
 
 /**
  * MD5加密工具
@@ -14,6 +18,15 @@ public class MD5Util {
     private static final String SALT = "yy";
    
     private static final String WECAHT_SALT="yy_aa";
+
+    public static int getIntegerUUID(){
+        Random rand=new Random();//生成随机数
+        String cardNnumer="";
+        for(int a=0;a<8;a++){
+            cardNnumer+=rand.nextInt(10);//生成6位数字
+        }
+        return Integer.valueOf(cardNnumer);
+    }
     
     public static String encode(String password) {
         password = password + SALT;

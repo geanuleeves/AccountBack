@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,10 +23,10 @@
 
 <body>
 
-<section id="container" class="">
+<section id="container" layout:fragment="content">
 
     <aside>
-        <div id="sidebar"  class="nav-collapse ">
+        <div id="sidebar" class="nav-collapse ">
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="active">
@@ -127,7 +129,7 @@
     </aside>
 
     <section id="main-content">
-        <section class="wrapper">
+        <section class="wrapper" th:fragment="roles-section" id="roles-section">
             <!--<div class="row">-->
 
             <!--</div>-->
@@ -137,60 +139,60 @@
                     <section class="panel">
                         <header class="panel-heading">
                             <div style="width: 20%">
-                                <a class="btn btn-compose" data-toggle="modal" href="#myModal">
+                                <a class="btn btn-compose" data-toggle="modal" href="#role-model">
                                     添加角色
                                 </a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title">Compose</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form class="form-horizontal" role="form">
-                                                    <div class="form-group">
-                                                        <label  class="col-lg-2 control-label">To</label>
-                                                        <div class="col-lg-10">
-                                                            <input type="text" class="form-control" id="inputEmail1" placeholder="">
+                                <!-- 弹出框 -->
+                                <!--<form role="form" method="post" th:action="@{/admin/role/update}">-->
+                                    <div class="modal fade" id="role-model" tabindex="-1"
+                                         role="dialog"
+                                         aria-labelledby="用户角色" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-hidden="true">&times;
+                                                    </button>
+                                                    <h4 class="modal-title">用户角色</h4>
+                                                </div>
+                                                <div id="single-role-model" class="modal-body" th:fragment="single-role-model">
+                                                    <form class="form-horizontal" role="form" method="post" th:action="@{/admin/role/update}">
+                                                        <input id="role_input_id" type="hidden" name="id" value="">
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">角色名称</label>
+                                                            <div class="col-lg-10">
+                                                                <input id="role_input_name" value="" type="text" class="form-control"
+                                                                       name="name"
+                                                                       placeholder="">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label  class="col-lg-2 control-label">Cc / Bcc</label>
-                                                        <div class="col-lg-10">
-                                                            <input type="text" class="form-control" id="cc" placeholder="">
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">角色等级</label>
+                                                            <div class="col-lg-10">
+                                                                <input id="role_input_roleLevel" value="" type="text" name="roleLevel" class="form-control"
+                                                                       placeholder="">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Subject</label>
-                                                        <div class="col-lg-10">
-                                                            <input type="text" class="form-control" id="inputPassword1" placeholder="">
+                                                        <div class="form-group">
+                                                            <label class="col-lg-2 control-label">角色描述</label>
+                                                            <div class="col-lg-10">
+                                                                <input id="role_input_description" value="" type="text" name="description" class="form-control"
+                                                                       placeholder="">
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="col-lg-2 control-label">Message</label>
-                                                        <div class="col-lg-10">
-                                                            <textarea name="" id="" class="form-control" cols="30" rows="10"></textarea>
+                                                        <div class="form-group">
+                                                            <div class="col-lg-offset-2 col-lg-10">
+                                                                <button type="submit" class="btn btn-send">保存</button>
+                                                            </div>
                                                         </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <div class="col-lg-offset-2 col-lg-10">
-                                                      <span class="btn green fileinput-button">
-                                                        <i class="icon-plus icon-white"></i>
-                                                        <span>Attachment</span>
-                                                        <input type="file" multiple=""  name="files[]">
-                                                      </span>
-                                                            <button type="submit" class="btn btn-send">Send</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div><!-- /.modal -->
+                                                    </form>
+                                                </div>
+                                            </div><!-- /.modal-content -->
+                                        </div><!-- /.modal-dialog -->
+                                    </div><!-- /.modal -->
+                                <!--</form>-->
                             </div>
+
                         </header>
                         <table class="table table-striped table-advance table-hover">
                             <thead>
@@ -203,25 +205,53 @@
                                 <th><i class="icon-edit-sign"></i> 操作</th>
                             </tr>
                             </thead>
-                            <tbody>
-                                <tr id="trRoles" th:each="role,iterStat:${roles}">
-                                    <td th:text="${iterStat.count}"></td>
-                                    <td><a href="#"><span th:text="${role.name}"></span></a></td>
-                                    <td class="hidden-phone"><span th:text="${role.description}"></span></td>
-                                    <td><span th:text="${role.roleLevel}"></span></td>
-                                    <td>
-                                        <button th:value="${role.id}" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></button>
-                                        <button th:value="${role.id}" class="btn btn-danger btn-xs"><i class="icon-trash "></i></button>
-                                    </td>
-                                </tr>
+                            <tbody th:if="${result != null} ">
+                            <tr th:each="role,iterStat:${result.list}">
+                                <td th:text="${iterStat.count}"></td>
+                                <td><span th:text="${role.name}"></span></td>
+                                <td class="hidden-phone"><span th:text="${role.description}"></span></td>
+                                <td><span th:text="${role.roleLevel}"></span></td>
+                                <td>
+                                    <a th:value="${role.id}" class="btn btn-primary btn-xs" data-toggle="modal"
+                                       href="#role-model" th:onclick="'javascript:getById(\''+${role.id}+'\');'"><i
+                                            class="icon-pencil"></i></a>
+                                    <button id="role-btn-delete" th:value="${role.id}" class="btn btn-danger btn-xs"
+                                            th:onclick="'javascript:deleteRoleById(\''+${role.id}+'\');'"><i
+                                            class="icon-trash "></i></button>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </section>
                 </div>
             </div>
             <!-- page end-->
+
+            <nav aria-label="Page navigation" class="navbar navbar-default navbar-fixed-bottom"
+                 style="margin-left: 50%">
+                <ul class="pagination" th:if="${result != null}">
+                    <li th:disabled="${result.hasPreviousPage}">
+                        <a href="#" aria-label="Previous"
+                           th:onclick="'javascript:getRolesByPages(\''+${result.prePage}+'\');'">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li th:each="page : ${#numbers.sequence(1,result.pages)}">
+                        <a href="#" th:onclick="'javascript:getRolesByPages(\''+${page}+'\');'"><span
+                                th:text="${page}"></span></a>
+                    </li>
+                    <li th:disabled="${result.hasNextPage}">
+                        <a href="#" aria-label="Next"
+                           th:onclick="'javascript:getRolesByPages(\''+${result.nextPage}+'\');'">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </section>
     </section>
+
+
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
@@ -255,21 +285,108 @@
 
     let trRoles = $('#trRoles');
 
-    $(function () {
-        // //加载用户角色集合
-        // axios.get('/admin/role/getAll')
-        //     .then(function (response) {
-        //         console.log(response);
-        //         if(response.status === 200){
-        //             console.log('请求成功');
-        //             roles = response.data.data;
-        //             trRoles.replaceWith(roles);
-        //         }
-        //     })
-        //     .catch(function (error) {
-        //         console.log(error);
-        //     });
-    });
+
 </script>
+
+<th:block layout:fragment="script">
+    <script>
+        $(function () {
+            //加载用户角色集合
+            axios.get('/admin/role/getRoles')
+                .then(function (response) {
+                    if (response.status === 200) {
+                        $('#roles-section').replaceWith(response.data);
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+
+            //模态框打开后
+            $('#role-model').on('shown.bs.modal', function () {
+                console.log("打开了");
+            });
+
+            //需要在打开的时候，销毁上次的初始化事件。
+            $('#role-model').off().on('show','hidden.bs.modal');
+        });
+
+        let getRolesByPages = function (page) {
+            //加载用户角色集合
+            axios.get('/admin/role/getRoles', {
+                params: {
+                    page: page
+                }
+            })
+                .then(function (response) {
+                    $('#roles-section').replaceWith(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+        let deleteRoleById = function (id) {
+            if (id == null || id === '') {
+                return false;
+            }
+            axios.get('/admin/role/deleteById', {
+                params: {
+                    id: id
+                }
+            })
+                .then(function (response) {
+                    $('#roles-section').replaceWith(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+        let updateRoleById = function (id) {
+            if (id == null || id === '') {
+                return false;
+            }
+            axios.get('/admin/role/update', {
+                params: {
+                    id: id
+                }
+            })
+                .then(function (response) {
+                    $('#roles-section').replaceWith(response.data);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+        let getById = function(id){
+            if (id == null || id === '') {
+                return false;
+            }
+            axios.get('/admin/role/getById', {
+                params: {
+                    id: id
+                }
+            })
+                .then(function (response) {
+                    let role = response.data.data;
+                    let role_input_id = $('#role_input_id');
+                    let role_input_name = $('#role_input_name');
+                    let role_input_roleLevel = $('#role_input_roleLevel');
+                    let role_input_description = $('#role_input_description');
+                    role_input_id.val(role.id);
+                    role_input_name.val(role.name);
+                    role_input_roleLevel.val(role.roleLevel);
+                    role_input_description.val(role.description);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        };
+
+    </script>
+</th:block>
+
 </body>
 </html>

@@ -1,9 +1,12 @@
 package com.wildb.account.entity;
 
 
+import javax.validation.constraints.NotNull;
 
 public class Role implements Comparable<Role>{
 	private Integer id;
+
+	@NotNull
 	private String name;
 	private Integer roleLevel;
 	private String description;

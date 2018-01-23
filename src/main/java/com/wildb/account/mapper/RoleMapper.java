@@ -1,7 +1,10 @@
 package com.wildb.account.mapper;
 
 import com.wildb.account.entity.Role;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -28,4 +31,18 @@ public interface RoleMapper {
      */
     @Select("select * from role")
     List<Role> getAllRole();
+
+
+    @Select("select * from role where id = #{id}")
+    Role selectRoleById(Integer id);
+
+    @Delete("delete from role where id = #{id}")
+    void deleteRoleById(Integer id);
+
+
+    @Update("UPDATE role r set r.`name` = #{name} ,r.description = #{description},r.role_level = #{roleLevel} where r.id = #{id}")
+    void updateRole(Role role);
+
+    @Insert("INSERT INTO role(id,name,description,role_level) VALUES(#{id},#{name},#{description},#{roleLevel})")
+    void insertRole(Role role);
 }
