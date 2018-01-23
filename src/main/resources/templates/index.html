@@ -1,130 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="wild._b">
-    <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-    <link rel="shortcut icon" href="../static/img/favicon.html">
-
-    <title>小新理财</title>
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
-    <!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
-    <link rel="import" href="admin/common/common.html">
-  </head>
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="admin/common/template">
   <body>
-    <section id="container" class="">
-        <div id="commonTemplate"></div>
-        <aside>
-            <div id="sidebar"  class="nav-collapse ">
-                <!-- sidebar menu start-->
-                <ul class="sidebar-menu">
-                    <li class="active">
-                        <a class="" th:href="@{/}">
-                            <i class="icon-dashboard"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a class="" th:href="@{/admin/role}">
-                            <i class="icon-dashboard"></i>
-                            <span>角色管理</span>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a class="" th:href="@{/admin/permisson}">
-                            <i class="icon-dashboard"></i>
-                            <span>权限管理</span>
-                        </a>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon-book"></i>
-                            <span>UI Elements</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" th:href="@{/admin/general}">General</a></li>
-                            <li><a class="" th:href="@{/admin/buttons}">Buttons</a></li>
-                            <li><a class="" th:href="@{/admin/widget}">Widget</a></li>
-                            <li><a class="" th:href="@{/admin/slider}">Slider</a></li>
-                            <li><a class="" th:href="@{/admin/font_awesome}">Font Awesome</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon-cogs"></i>
-                            <span>Components</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" th:href="@{/admin/grids}">Grids</a></li>
-                            <li><a class="" th:href="@{/admin/calendar}">Calendar</a></li>
-                            <li><a class="" th:href="@{/admin/charts}">Charts</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon-tasks"></i>
-                            <span>Form Stuff</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" th:href="@{/admin/form_component}">Form Components</a></li>
-                            <li><a class="" th:href="@{/admin/form_wizard}">Form Wizard</a></li>
-                            <li><a class="" th:href="@{/admin/form_validation}">Form Validation</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon-th"></i>
-                            <span>Data Tables</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" th:href="@{/admin/basic_table.html}">Basic Table</a></li>
-                            <li><a class="" th:href="@{/admin/dynamic_table.html}">Dynamic Table</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="" th:href="@{/admin/inbox.html}">
-                            <i class="icon-envelope"></i>
-                            <span>Mail </span>
-                            <span class="label label-danger pull-right mail-info">2</span>
-                        </a>
-                    </li>
-                    <li class="sub-menu">
-                        <a href="javascript:;" class="">
-                            <i class="icon-glass"></i>
-                            <span>Extra</span>
-                            <span class="arrow"></span>
-                        </a>
-                        <ul class="sub">
-                            <li><a class="" th:href="@{/admin/blank}">Blank Page</a></li>
-                            <li><a class="" th:href="@{/admin/profile}">Profile</a></li>
-                            <li><a class="" th:href="@{/admin/invoice}">Invoice</a></li>
-                            <li><a class="" href="../../error/404">404 Error</a></li>
-                            <li><a class="" href="../../error/500">500 Error</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="" th:href="@{/login}">
-                            <i class="icon-user"></i>
-                            <span>Login Page</span>
-                        </a>
-                    </li>
-                </ul>
-                <!-- sidebar menu end-->
-            </div>
-        </aside>
-  <!--main content start-->
-      <section id="main-content">
+      <section id="main-content" layout:fragment="content">
           <section class="wrapper">
               <!--state overview start-->
               <div class="row state-overview">
@@ -786,53 +665,32 @@
               </div>
           </section>
       </section>
-    </section>
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="../static/js/jquery.js"></script>
-    <script src="../static/js/jquery-1.8.3.min.js"></script>
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/jquery.scrollTo.min.js"></script>
-    <script src="../static/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="../static/js/jquery.sparkline.js" type="text/javascript"></script>
-    <script src="../static/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js"></script>
-    <script src="../static/js/owl.carousel.js" ></script>
-    <script src="../static/js/jquery.customSelect.min.js" ></script>
 
-    <!--common script for all pages-->
-    <script src="../static/js/common-scripts.js"></script>
+  <th:block layout:fragment="script">
+      <script src="../static/js/sparkline-chart.js"></script>
+      <script src="../static/js/easy-pie-chart.js"></script>
 
-    <!--script for this page-->
-    <script src="../static/js/sparkline-chart.js"></script>
-    <script src="../static/js/easy-pie-chart.js"></script>
+      <script>
 
-  <script>
+          //owl carousel
 
-      //owl carousel
+          $(document).ready(function() {
+              $("#owl-demo").owlCarousel({
+                  navigation : true,
+                  slideSpeed : 300,
+                  paginationSpeed : 400,
+                  singleItem : true
 
-      $(document).ready(function() {
-          $("#owl-demo").owlCarousel({
-              navigation : true,
-              slideSpeed : 300,
-              paginationSpeed : 400,
-              singleItem : true
-
+              });
           });
-      });
 
-      //custom select box
+          //custom select box
 
-      $(function(){
-          $('select.styled').customSelect();
-      });
+          $(function(){
+              $('select.styled').customSelect();
+          });
+      </script>
 
-
-      let link = document.querySelector('link[rel="import"]');
-
-      // 从导入中复制 <template>。
-      let template = link.import.querySelector('template');
-      let content = template.content.cloneNode(true);
-
-      document.querySelector('#commonTemplate').appendChild(content);
-  </script>
+  </th:block>
   </body>
 </html>
