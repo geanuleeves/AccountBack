@@ -9,7 +9,7 @@ public interface RoleService {
     /**
      * 获取用户角色集合
      */
-    List<Role> getRoles();
+    List<Role> getRoles(String keyword);
 
     Role findRoleById(Integer id);
 

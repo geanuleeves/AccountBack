@@ -19,18 +19,11 @@ public interface RoleMapper {
 
 
     /**
-     * 根据权限ID获取用户角色实体
-     * @param pid
-     * @return
-     */
-    Role selectRoleByPermissionIdAndUserId(Integer pid,Integer userId);
-
-    /**
      * 获取所有角色集合
      * @return
      */
-    @Select("select * from role")
-    List<Role> getAllRole();
+    @Select("select * from role where name like CONCAT('%',#{keyword},'%')   order by role_level")
+    List<Role> getAllRole(String keyword);
 
 
     @Select("select * from role where id = #{id}")

@@ -69,7 +69,7 @@ public class RoleController {
 
     private PageInfo<Role> getAll(PageReq pageReq){
         PageHelper.startPage(pageReq.getPage(),pageReq.getPagesize());
-        List<Role> roles = this.roleService.getRoles();
+        List<Role> roles = this.roleService.getRoles(pageReq.getKeyword());
         return new PageInfo<>(roles);
     }
 

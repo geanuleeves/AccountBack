@@ -4,7 +4,6 @@ import com.wildb.account.entity.Role;
 import com.wildb.account.mapper.RoleMapper;
 import com.wildb.account.service.RoleService;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,8 +15,8 @@ public class RoleServiceImpl implements RoleService {
     private RoleMapper roleMapper;
 
     @Override
-    public List<Role> getRoles() {
-        List<Role> allRole = this.roleMapper.getAllRole();
+    public List<Role> getRoles(String keyword) {
+        List<Role> allRole = this.roleMapper.getAllRole(keyword);
         return allRole;
     }
 
