@@ -21,6 +21,8 @@ import java.io.IOException;
 public class UrlAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+
+
         Authentication auth
                 = SecurityContextHolder.getContext().getAuthentication();
 
@@ -30,6 +32,6 @@ public class UrlAccessDeniedHandler implements AccessDeniedHandler {
                     + httpServletRequest.getRequestURI());
         }
         log.error("权限不足");
-        //httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/403");
+        //httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/error/403");
     }
 }

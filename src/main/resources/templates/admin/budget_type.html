@@ -5,34 +5,34 @@
       layout:decorator="admin/common/template">
 <body>
 <section id="main-content" layout:fragment="content">
-    <section class="wrapper" th:fragment="roles-section" id="roles-section">
+    <section class="wrapper" th:fragment="budgetType-section" id="budgetType-section">
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading" style="border-bottom:0px">
                         <div>
-                            <div style=" float: left;width: 120px"><a class="btn btn-compose" data-toggle="modal" href="#role-model">添加角色</a></div>
+                            <div style=" float: left;width: 120px"><a class="btn btn-compose" data-toggle="modal" href="#role-model">添加分类预算</a></div>
                             <div style=" float: right;"><input id="role_input_search" onkeypress="if(event.keyCode==13) {search($(this).val())}" class="form-control search" name="keyword" placeholder="关键字搜索" type="text"></div>
 
                             <div class="modal fade" id="role-model" tabindex="-1"
                                  role="dialog"
-                                 aria-labelledby="用户角色" aria-hidden="true">
+                                 aria-labelledby="分类预算" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">&times;
                                             </button>
-                                            <h4 class="modal-title">用户角色</h4>
+                                            <h4 class="modal-title">分类预算</h4>
                                         </div>
-                                        <div id="single-role-model" class="modal-body" th:fragment="single-role-model">
+                                        <div id="single-role-model" class="modal-body" th:fragment="single-budgetType-model">
                                             <form class="form-horizontal" role="form" method="post"
-                                                  th:action="@{/admin/role/update}">
-                                                <input id="role_input_id" type="hidden" name="id" value="">
+                                                  th:action="@{/admin/budgetType/update}">
+                                                <input id="budgetType_input_id" type="hidden" name="id" value="">
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">角色名称</label>
                                                     <div class="col-lg-10">
-                                                        <input id="role_input_name" value="" type="text"
+                                                        <input id="budgetType_input_name" value="" type="text"
                                                                class="form-control"
                                                                name="name"
                                                                placeholder="">
@@ -41,15 +41,15 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">角色等级</label>
                                                     <div class="col-lg-10">
-                                                        <input id="role_input_roleLevel" value="" type="text"
-                                                               name="roleLevel" class="form-control"
+                                                        <input id="budgetType_input_budgetTypeLevel" value="" type="text"
+                                                               name="budgetTypeLevel" class="form-control"
                                                                placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="col-lg-2 control-label">角色描述</label>
                                                     <div class="col-lg-10">
-                                                        <input id="role_input_description" value="" type="text"
+                                                        <input id="budgetType_input_description" value="" type="text"
                                                                name="description" class="form-control"
                                                                placeholder="">
                                                     </div>
@@ -79,17 +79,17 @@
                         </tr>
                         </thead>
                         <tbody th:if="${result != null} ">
-                        <tr th:each="role,iterStat:${result.list}">
+                        <tr th:each="budgetType,iterStat:${result.list}">
                             <td th:text="${iterStat.count}"></td>
-                            <td><span th:text="${role.name}"></span></td>
-                            <td class="hidden-phone"><span th:text="${role.description}"></span></td>
-                            <td><span th:text="${role.roleLevel}"></span></td>
+                            <td><span th:text="${budgetType.name}"></span></td>
+                            <td class="hidden-phone"><span th:text="${budgetType.description}"></span></td>
+                            <td><span th:text="${budgetType.budgetTypeLevel}"></span></td>
                             <td>
-                                <a th:value="${role.id}" class="btn btn-primary btn-xs" data-toggle="modal"
-                                   href="#role-model" th:onclick="'javascript:getById(\''+${role.id}+'\');'"><i
+                                <a th:value="${budgetType.id}" class="btn btn-primary btn-xs" data-toggle="modal"
+                                   href="#budgetType-model" th:onclick="'javascript:getById(\''+${budgetType.id}+'\');'"><i
                                         class="icon-pencil"></i></a>
-                                <button id="role-btn-delete" th:value="${role.id}" class="btn btn-danger btn-xs"
-                                        th:onclick="'javascript:deleteRoleById(\''+${role.id}+'\');'"><i
+                                <button id="budgetType-btn-delete" th:value="${budgetType.id}" class="btn btn-danger btn-xs"
+                                        th:onclick="'javascript:deletebudgetTypeById(\''+${budgetType.id}+'\');'"><i
                                         class="icon-trash "></i></button>
                             </td>
                         </tr>
@@ -105,17 +105,17 @@
             <ul class="pagination" th:if="${result != null}">
                 <li th:disabled="${result.hasPreviousPage}">
                     <a href="#" aria-label="Previous"
-                       th:onclick="'javascript:getRolesByPages(\''+${result.prePage}+'\');'">
+                       th:onclick="'javascript:getbudget-typeByPages(\''+${result.prePage}+'\');'">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li th:each="page : ${#numbers.sequence(1,result.pages)}">
-                    <a href="#" th:onclick="'javascript:getRolesByPages(\''+${page}+'\');'"><span
+                    <a href="#" th:onclick="'javascript:getbudget-typeByPages(\''+${page}+'\');'"><span
                             th:text="${page}"></span></a>
                 </li>
                 <li th:disabled="${result.hasNextPage}">
                     <a href="#" aria-label="Next"
-                       th:onclick="'javascript:getRolesByPages(\''+${result.nextPage}+'\');'">
+                       th:onclick="'javascript:getbudget-typeByPages(\''+${result.nextPage}+'\');'">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -134,14 +134,14 @@
 
         function  search(keyword) {
             //加载用户角色集合
-            axios.get('/admin/role/getRoles',{
+            axios.get('/admin/budgetType/getbudget-type',{
                 params: {
                     keyword: keyword
                 }
             })
                 .then(function (response) {
                     if (response.status === 200) {
-                        $('#roles-section').replaceWith(response.data);
+                        $('#budgetType-section').replaceWith(response.data);
                     }
                 })
                 .catch(function (error) {
@@ -149,49 +149,49 @@
                 });
         }
 
-        let getRolesByPages = function (page) {
+        let getbudgetTypeByPages = function (page) {
             //加载用户角色集合
-            axios.get('/admin/role/getRoles', {
+            axios.get('/admin/budgetType/getbudget-type', {
                 params: {
                     page: page
                 }
             })
                 .then(function (response) {
-                    $('#roles-section').replaceWith(response.data);
+                    $('#budgetType-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let deleteRoleById = function (id) {
+        let deletebudgetTypeById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/role/deleteById', {
+            axios.get('/admin/budgetType/deleteById', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    $('#roles-section').replaceWith(response.data);
+                    $('#budgetType-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let updateRoleById = function (id) {
+        let updatebudgetTypeById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/role/update', {
+            axios.get('/admin/budgetType/update', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    $('#roles-section').replaceWith(response.data);
+                    $('#budgetType-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -202,21 +202,21 @@
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/role/getById', {
+            axios.get('/admin/budgetType/getById', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    let role = response.data.data;
-                    let role_input_id = $('#role_input_id');
-                    let role_input_name = $('#role_input_name');
-                    let role_input_roleLevel = $('#role_input_roleLevel');
-                    let role_input_description = $('#role_input_description');
-                    role_input_id.val(role.id);
-                    role_input_name.val(role.name);
-                    role_input_roleLevel.val(role.roleLevel);
-                    role_input_description.val(role.description);
+                    let budgetType = response.data.data;
+                    let budgetType_input_id = $('#budgetType_input_id');
+                    let budgetType_input_name = $('#budgetType_input_name');
+                    let budgetType_input_budgetTypeLevel = $('#budgetType_input_budgetTypeLevel');
+                    let budgetType_input_description = $('#budgetType_input_description');
+                    budgetType_input_id.val(budgetType.id);
+                    budgetType_input_name.val(budgetType.name);
+                    budgetType_input_budgetTypeLevel.val(budgetType.budgetTypeLevel);
+                    budgetType_input_description.val(budgetType.description);
                 })
                 .catch(function (error) {
                     console.log(error);

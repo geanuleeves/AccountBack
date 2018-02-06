@@ -13,9 +13,12 @@
             <aside class="profile-nav col-lg-3">
                 <section class="panel">
                     <div class="user-heading round">
-                        <a href="#">
-                            <img src="../../static/img/profile-avatar.jpg" alt="">
-                        </a>
+                        <form id="user_form_headImg" method="post" enctype="multipart/form-data" action="">
+                            <input id="user_input_headImg" type="file" name="file" style="visibility: hidden">
+                            <a type="file" name="file" onclick="uploadHeadImg()">
+                                <img src="../../static/img/profile-avatar.jpg" alt="">
+                            </a>
+                        </form>
                         <h1><span sec:authentication="principal.cnname"></span></h1>
                         <p><span sec:authentication="principal.email"></span></p>
                     </div>
@@ -37,7 +40,9 @@
                     <div class="panel-body bio-graph-info">
                         <h1>设置</h1>
                         <!--method="post" th:action="@{/admin/users/update}"-->
-                        <form class="form-horizontal" role="form" method="post" th:action="@{/admin/users/update}">
+                        <form id="user_edit_form" class="form-horizontal" role="form" method="post"
+                              enctype="multipart/form-data"
+                              th:action="@{/admin/users/update}">
                             <input name="id" th:value="${#authorization.authentication.principal.id}" hidden>
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">账号 </label>
@@ -64,12 +69,6 @@
                                            class="form-control" id="c-name" placeholder=" ">
                                 </div>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label  class="col-lg-2 control-label">Occupation</label>-->
-                            <!--<div class="col-lg-6">-->
-                            <!--<input type="text" class="form-control" id="occupation" placeholder=" ">-->
-                            <!--</div>-->
-                            <!--</div>-->
                             <div class="form-group">
                                 <label class="col-lg-2 control-label">电子邮箱 </label>
                                 <div class="col-lg-6">
@@ -90,17 +89,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--<div class="form-group">-->
-                            <!--<label  class="col-lg-2 control-label">个人头像</label>-->
-                            <!--<div class="col-lg-6">-->
-                            <!--<input type="file" class="file-pos" id="exampleInputFile">-->
-                            <!--</div>-->
-                            <!--</div>-->
 
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
-                                    <button type="submit" class="btn btn-success">保存</button>
-                                    <button type="button" class="btn btn-default">取消</button>
+                                    <button class="btn btn-success" type="submit">保存</button>
                                 </div>
                             </div>
                         </form>
@@ -111,6 +103,39 @@
         </div>
 
     </section>
+    <div class="modal fade bs-example-modal-sm" id="permission-model" tabindex="-1"
+         role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">&times;
+                    </button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="user_update_mpdel" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">提示框</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="user_update_model_p"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
@@ -120,14 +145,70 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
     <script>
         $(function () {
-
             let text = $('#selectUserRoles').text();
             $('#selectUserRoles').selectpicker({
                 title: text
             });
 
-
+            //更新完毕刷新文档
+            $('#user_update_mpdel').on('hidden.bs.modal', function (e) {
+                location.reload();
+            })
         });
+
+        $('form#user_edit_form').submit(function (e) {
+            e.preventDefault();
+            let user = $('#user_edit_form').serialize();
+            $.ajax({
+                    type: "POST",
+                    url: "/admin/users/update",
+                    data: user,
+                    success: function (res) {
+                        if (res.code === 0) {
+                            console.log('1');
+                            $('#user_update_mpdel').modal('show');
+                            $('#user_update_model_p').html(res.data);
+                        }
+                    },
+                    error: function () {
+                        console.log('请求失败！');
+                    }
+                }
+            )
+        });
+
+        function uploadHeadImg() {
+            let user_input_headImg = $('#user_input_headImg');
+            user_input_headImg.click();
+            user_input_headImg.change(function (e) {
+                if($(this).val() === ''){
+                    return false;
+                }
+                let formData = new FormData(this);
+                console.log(formData);
+                $('#user_form_headImg').submit(function (e) {
+                    console.log('xxx');
+                    e.preventDefault();
+                    // $.ajax({
+                    //         type: "POST",
+                    //         url: "/admin/users/update",
+                    //         data: user,
+                    //         success: function (res) {
+                    //             if (res.code === 0) {
+                    //                 console.log('1');
+                    //                 $('#user_update_mpdel').modal('show');
+                    //                 $('#user_update_model_p').html(res.data);
+                    //             }
+                    //         },
+                    //         error: function () {
+                    //             console.log('请求失败！');
+                    //         }
+                    //     }
+                    // )
+                });
+                $(this).val('');
+            })
+        }
     </script>
 </th:block>
 

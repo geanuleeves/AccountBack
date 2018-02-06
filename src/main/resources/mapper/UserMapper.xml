@@ -9,6 +9,7 @@
 		<result property="email" column="email"/>
 		<result property="telephone" column="telephone"/>
 		<result property="mobilePhone" column="mobile_phone"/>
+		<result property="headImg" column="head_img"></result>
     </resultMap>
 
     
@@ -34,6 +35,9 @@
 			</if>
 			<if test="mobilePhone != null and mobilePhone != ''">
 				and mobile_phone = #{mobilePhone}
+			</if>
+			<if test="headImg != null and headImg != ''">
+				and headImg = #{headImg}
 			</if>
 		</where>
     </sql>
@@ -66,10 +70,7 @@
 			email,
 			telephone,
 			mobile_phone,
-			wechat_id,
-			skill,
-			department_id,
-			login_count
+			head_img
 		)VALUES(
 			#{id},
 			#{cnname},
@@ -78,10 +79,7 @@
 			#{email},
 			#{telephone},
 			#{mobilePhone},
-			#{wechatId},
-			#{skill},
-			#{departmentId},
-			#{loginCount}
+			#{headImg}
 		)
     </insert>
     
@@ -102,6 +100,9 @@
 			</if>
 			<if test=" mobilePhone!= null and mobilePhone != ''">
 			mobile_phone = #{mobilePhone},
+			</if>
+			<if test=" headImg!= null and headImg != ''">
+			head_img = #{headImg},
 			</if>
 		 </set>			
 		WHERE id = #{id}

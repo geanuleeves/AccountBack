@@ -20,12 +20,13 @@ public class User implements UserDetails,Serializable {
     private Integer id;
     private String cnname;
     private String username;
-    @JsonIgnore
+//    @JsonIgnore
     private String password;
     private String rePassword;
     private String historyPassword;
     private String email;
-    @JsonIgnore
+    private String headImg;
+//    @JsonIgnore
     private String telephone;
     private String mobilePhone;
     private List<? extends GrantedAuthority> authorities;  //此处authorities由UrlGrantedAuthority定义
@@ -167,5 +168,14 @@ public class User implements UserDetails,Serializable {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
 
 }

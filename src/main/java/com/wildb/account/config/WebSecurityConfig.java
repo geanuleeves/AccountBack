@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().httpBasic();
 //                .and().logout().invalidateHttpSession(true).clearAuthentication(true).permitAll()
 
-//        http.csrf().disable();
+        http.csrf().disable();
     }
 
     @Override

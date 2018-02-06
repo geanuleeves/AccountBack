@@ -9,6 +9,10 @@
     <meta name="author" content="wild._b">
     <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <link rel="shortcut icon" href="../../../static/img/favicon.html">
+    <!--一般的ajax请求在Spring Security中是被forbidden的，因为请求的时候csrf这个token为null-->
+    <!--<meta name="_csrf" content="${_csrf.token}"/>-->
+    <!-- default header name is X-CSRF-TOKEN -->
+    <!--<meta name="_csrf_header" content="${_csrf.headerName}"/>-->
 
 
     <title>小新理财</title>
@@ -66,6 +70,12 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+                <li>
+                    <a class="" th:href="@{/admin/user}">
+                        <i class="icon-male"></i>
+                        <span>&nbsp;用户管理</span>
+                    </a>
+                </li>
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
                         <i class="icon-book"></i>
@@ -74,7 +84,7 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" th:href="@{/admin/role}">角色</a></li>
-                        <li><a class="" th:href="@{/admin/permisson}">权限</a></li>
+                        <li><a class="" th:href="@{/admin/permission}">权限</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">
@@ -85,6 +95,7 @@
                     </a>
                     <ul class="sub">
                         <li><a class="" th:href="@{/admin/budget}">预算</a></li>
+                        <li><a class="" th:href="@{/admin/budget_type}">分类预算</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu">

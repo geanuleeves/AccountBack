@@ -5,53 +5,64 @@
       layout:decorator="admin/common/template">
 <body>
 <section id="main-content" layout:fragment="content">
-    <section class="wrapper" th:fragment="roles-section" id="roles-section">
+    <section class="wrapper" th:fragment="user-section" id="user-section">
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading" style="border-bottom:0px">
                         <div>
-                            <div style=" float: left;width: 120px"><a class="btn btn-compose" data-toggle="modal" href="#role-model">添加角色</a></div>
-                            <div style=" float: right;"><input id="role_input_search" onkeypress="if(event.keyCode==13) {search($(this).val())}" class="form-control search" name="keyword" placeholder="关键字搜索" type="text"></div>
+                            <div style=" float: left;width: 120px"><a class="btn btn-compose" data-toggle="modal" href="#user-model">添加用户</a></div>
+                            <div style=" float: right;"><input id="user_input_search" onkeypress="if(event.keyCode==13) {search($(this).val())}" class="form-control search" name="keyword" placeholder="用户名称" type="text"></div>
 
-                            <div class="modal fade" id="role-model" tabindex="-1"
+                            <div class="modal fade" id="user-model" tabindex="-1"
                                  role="dialog"
-                                 aria-labelledby="用户角色" aria-hidden="true">
+                                 aria-labelledby="系统用户" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">&times;
                                             </button>
-                                            <h4 class="modal-title">用户角色</h4>
+                                            <h4 class="modal-title">系统用户</h4>
                                         </div>
-                                        <div id="single-role-model" class="modal-body" th:fragment="single-role-model">
+                                        <div id="single-user-model" class="modal-body">
                                             <form class="form-horizontal" role="form" method="post"
-                                                  th:action="@{/admin/role/update}">
-                                                <input id="role_input_id" type="hidden" name="id" value="">
+                                                  th:action="@{/admin/users/renew}">
+                                                <input id="user_input_id" type="hidden" name="id" >
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">角色名称</label>
+                                                    <label class="col-lg-2 control-label">用户名</label>
                                                     <div class="col-lg-10">
-                                                        <input id="role_input_name" value="" type="text"
+                                                        <input id="user_input_cnname"  type="text"
                                                                class="form-control"
-                                                               name="name"
-                                                               placeholder="">
+                                                               name="cnname">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">角色等级</label>
+                                                    <label class="col-lg-2 control-label">账号</label>
                                                     <div class="col-lg-10">
-                                                        <input id="role_input_roleLevel" value="" type="text"
-                                                               name="roleLevel" class="form-control"
-                                                               placeholder="">
+                                                        <input id="user_input_username"  type="text"
+                                                               name="username" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">角色描述</label>
+                                                    <label class="col-lg-2 control-label">密码</label>
                                                     <div class="col-lg-10">
-                                                        <input id="role_input_description" value="" type="text"
-                                                               name="description" class="form-control"
-                                                               placeholder="">
+                                                        <input id="user_input_password"  type="text"
+                                                               name="password" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">电子邮件</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="user_input_email"
+                                                               name="email" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-lg-2 control-label">手机号码</label>
+                                                    <div class="col-lg-10">
+                                                        <input id="user_input_telephone"
+                                                               name="telephone" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -63,33 +74,35 @@
                                         </div>
                                     </div><!-- /.modal-content -->
                                 </div><!-- /.modal-dialog -->
-                            </div><!-- /.modal -->
-                            <!--</form>-->
+                            </div>
                         </div>
                     </header>
                     <table class="table table-striped table-advance table-hover" style="margin-top: 60px">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th><i class="icon-bullhorn"></i> 名称</th>
-                            <th class="hidden-phone"><i class="icon-question-sign"></i> 描述</th>
-                            <th><i class="icon-bookmark"></i> 等级</th>
-                            <!--<th><i class=" icon-edit"></i> Status</th>-->
+                            <th><i class="icon-bullhorn"></i> 用户名</th>
+                            <th><i class="icon-bookmark"></i> 账号</th>
+                            <th><i class="icon-bookmark"></i> 密码</th>
+                            <th class="hidden-phone"><i class="icon-question-sign"></i> 电子邮件</th>
+                            <th><i class="icon-bookmark"></i> 手机号码</th>
                             <th><i class="icon-edit-sign"></i> 操作</th>
                         </tr>
                         </thead>
                         <tbody th:if="${result != null} ">
-                        <tr th:each="role,iterStat:${result.list}">
+                        <tr th:each="user,iterStat:${result.list}">
                             <td th:text="${iterStat.count}"></td>
-                            <td><span th:text="${role.name}"></span></td>
-                            <td class="hidden-phone"><span th:text="${role.description}"></span></td>
-                            <td><span th:text="${role.roleLevel}"></span></td>
+                            <td><span th:text="${user.cnname}"></span></td>
+                            <td><span th:text="${user.username}"></span></td>
+                            <td><span th:text="${user.password}"></span></td>
+                            <td class="hidden-phone"><span th:text="${user.email}"></span></td>
+                            <td><span th:text="${user.telephone}"></span></td>
                             <td>
-                                <a th:value="${role.id}" class="btn btn-primary btn-xs" data-toggle="modal"
-                                   href="#role-model" th:onclick="'javascript:getById(\''+${role.id}+'\');'"><i
+                                <a th:value="${user.id}" class="btn btn-primary btn-xs" data-toggle="modal"
+                                   href="#user-model" th:onclick="'javascript:getUserById(\''+${user.id}+'\');'"><i
                                         class="icon-pencil"></i></a>
-                                <button id="role-btn-delete" th:value="${role.id}" class="btn btn-danger btn-xs"
-                                        th:onclick="'javascript:deleteRoleById(\''+${role.id}+'\');'"><i
+                                <button id="user-btn-delete" th:value="${user.id}" class="btn btn-danger btn-xs"
+                                        th:onclick="'javascript:deleteUserById(\''+${user.id}+'\');'"><i
                                         class="icon-trash "></i></button>
                             </td>
                         </tr>
@@ -105,17 +118,17 @@
             <ul class="pagination" th:if="${result != null}">
                 <li th:disabled="${result.hasPreviousPage}">
                     <a href="#" aria-label="Previous"
-                       th:onclick="'javascript:getRolesByPages(\''+${result.prePage}+'\');'">
+                       th:onclick="'javascript:getUsersByPages(\''+${result.prePage}+'\');'">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li th:each="page : ${#numbers.sequence(1,result.pages)}">
-                    <a href="#" th:onclick="'javascript:getRolesByPages(\''+${page}+'\');'"><span
+                    <a href="#" th:onclick="'javascript:getUsersByPages(\''+${page}+'\');'"><span
                             th:text="${page}"></span></a>
                 </li>
                 <li th:disabled="${result.hasNextPage}">
                     <a href="#" aria-label="Next"
-                       th:onclick="'javascript:getRolesByPages(\''+${result.nextPage}+'\');'">
+                       th:onclick="'javascript:getUsersByPages(\''+${result.nextPage}+'\');'">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -132,16 +145,16 @@
             search("");
         });
 
-        function  search(keyword) {
+        function search(keyword) {
             //加载用户角色集合
-            axios.get('/admin/role/getRoles',{
+            axios.get('/admin/users/getAll',{
                 params: {
                     keyword: keyword
                 }
             })
                 .then(function (response) {
                     if (response.status === 200) {
-                        $('#roles-section').replaceWith(response.data);
+                        $('#user-section').replaceWith(response.data);
                     }
                 })
                 .catch(function (error) {
@@ -149,74 +162,78 @@
                 });
         }
 
-        let getRolesByPages = function (page) {
+        let getUsersByPages = function (page) {
             //加载用户角色集合
-            axios.get('/admin/role/getRoles', {
+            axios.get('/admin/users/getAll', {
                 params: {
                     page: page
                 }
             })
                 .then(function (response) {
-                    $('#roles-section').replaceWith(response.data);
+                    $('#user-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let deleteRoleById = function (id) {
+        let deleteUserById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/role/deleteById', {
+            axios.delete('/admin/users/deleteById', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    $('#roles-section').replaceWith(response.data);
+                    $('#user-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let updateRoleById = function (id) {
+        let updateUserById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/role/update', {
+            axios.post('/admin/users/update', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    $('#roles-section').replaceWith(response.data);
+                    $('#user-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let getById = function (id) {
+        let getUserById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/role/getById', {
+            axios.get('/admin/users/getUserById', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    let role = response.data.data;
-                    let role_input_id = $('#role_input_id');
-                    let role_input_name = $('#role_input_name');
-                    let role_input_roleLevel = $('#role_input_roleLevel');
-                    let role_input_description = $('#role_input_description');
-                    role_input_id.val(role.id);
-                    role_input_name.val(role.name);
-                    role_input_roleLevel.val(role.roleLevel);
-                    role_input_description.val(role.description);
+                    let user = response.data.data;
+                    let user_input_id = $('#user_input_id');
+                    let user_input_cnname = $('#user_input_cnname');
+                    let user_input_username = $('#user_input_username');
+                    let user_input_password = $('#user_input_password');
+                    let user_input_telephone = $('#user_input_telephone');
+                    let user_input_email = $('#user_input_email');
+                    user_input_id.val(user.id);
+                    user_input_cnname.val(user.cnname);
+                    user_input_username.val(user.username);
+                    user_input_password.val(user.password);
+                    user_input_telephone.val(user.telephone);
+                    user_input_email.val(user.email);
                 })
                 .catch(function (error) {
                     console.log(error);
