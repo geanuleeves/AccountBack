@@ -32,6 +32,10 @@ public class MD5Util {
         password = password + SALT;
         return processEncode(password);
     }
+
+    public static String getUUID(){
+       return UUID.randomUUID().toString().replace("-","");
+    }
     
     /**
      * 与微信模块约定的加密模块

@@ -55,14 +55,12 @@
                         <li><a th:href="@{/logout}"><i class="icon-key"></i> 登出</a></li>
                     </ul>
                 </li>
-                <!-- user login dropdown end -->
             </ul>
         </div>
     </header>
 
     <aside layout:fragment="asider">
         <div id="sidebar"  class="nav-collapse">
-            <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="active">
                     <a class="" th:href="@{/}">
@@ -72,13 +70,25 @@
                 </li>
                 <li>
                     <a class="" th:href="@{/admin/user}">
-                        <i class="icon-male"></i>
-                        <span>&nbsp;用户管理</span>
+                        &nbsp;<i class="icon-male"></i>
+                        <span>用户管理</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="" th:href="@{/admin/bill_type}">
+                        <i class="icon-cny"></i>
+                        <span>账单类型</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="" th:href="@{/admin/currency}">
+                        &nbsp;<i class="icon-jpy"></i>
+                        <span>币种管理</span>
                     </a>
                 </li>
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
-                        <i class="icon-book"></i>
+                        <i class="icon-user-md"></i>
                         <span>权限管理</span>
                         <span class="arrow"></span>
                     </a>
@@ -87,9 +97,10 @@
                         <li><a class="" th:href="@{/admin/permission}">权限</a></li>
                     </ul>
                 </li>
+
                 <li class="sub-menu">
                     <a href="javascript:;" class="">
-                        <i class="icon-book"></i>
+                        <i class="icon-file-text"></i>
                         <span>预算管理</span>
                         <span class="arrow"></span>
                     </a>

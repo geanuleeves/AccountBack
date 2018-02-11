@@ -2,9 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wildb.account.mapper.ExpenditureMapper">
   <resultMap id="BaseResultMap" type="com.wildb.account.entity.Expenditure">
-    <!--
-      WARNING - @mbg.generated
-    -->
     <id column="id" jdbcType="CHAR" property="id" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />

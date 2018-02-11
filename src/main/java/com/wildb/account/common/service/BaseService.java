@@ -16,14 +16,14 @@ import java.util.List;
  * <p>
  * 基于通用Mapper的MyBatis来实现Service接口的抽象Service
  */
-public abstract class AbstractService<T> implements Service<T> {
+public abstract class BaseService<T> implements IService<T> {
 
     @Autowired
     protected MyMapper<T> mapper;
 
     private Class<T> modelClass;    // 当前泛型真实类型的Class
 
-    public AbstractService() {
+    public BaseService() {
         ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
         modelClass = (Class<T>) pt.getActualTypeArguments()[0];
     }
@@ -39,7 +39,7 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         mapper.deleteByPrimaryKey(id);
     }
 
@@ -54,7 +54,7 @@ public abstract class AbstractService<T> implements Service<T> {
     }
 
     @Override
-    public T findById(Integer id) {
+    public T findById(String id) {
         return mapper.selectByPrimaryKey(id);
     }
 

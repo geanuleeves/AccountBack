@@ -12,7 +12,8 @@ import java.util.List;
  *
  * @param <T> the model type parameter
  */
-public interface Service<T> {
+@org.springframework.stereotype.Service
+public interface IService<T> {
     /**
      * @param model
      */
@@ -30,7 +31,7 @@ public interface Service<T> {
      *
      * @param id
      */
-    void deleteById(Integer id);
+    void deleteById(String id);
 
     /**
      * 批量刪除 eg：ids -> “1,2,3,4”
@@ -52,7 +53,7 @@ public interface Service<T> {
      * @param id
      * @return
      */
-    T findById(Integer id);
+    T findById(String id);
 
     /**
      * 通过某个成员属性查找,value需符合unique约束

@@ -3,6 +3,7 @@ package com.wildb.account.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Table(name = "`currency`")
@@ -25,4 +26,16 @@ public class Currency {
     @Column(name = "`currency_name`")
     private String currencyName;
 
+
+    /**
+     * 币值（RMB）
+     */
+    @Column(name = "`currency_value`")
+    private BigDecimal  currencyValue;
+
+    /**
+     * 英文缩写
+     */
+    @Column(name = "`abbreviation`")
+    private String abbreviation;
 }

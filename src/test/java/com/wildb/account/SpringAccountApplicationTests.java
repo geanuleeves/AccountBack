@@ -1,8 +1,11 @@
 package com.wildb.account;
 
+import com.wildb.account.common.utils.MyMapper;
+import com.wildb.account.entity.BillType;
 import com.wildb.account.entity.Book;
 import com.wildb.account.entity.Currency;
 import com.wildb.account.entity.Permission;
+import com.wildb.account.mapper.BillTypeMapper;
 import com.wildb.account.mapper.BookMapper;
 import com.wildb.account.mapper.CurrencyMapper;
 import org.junit.Assert;
@@ -28,15 +31,19 @@ public class SpringAccountApplicationTests {
 	@Resource
 	private CurrencyMapper currencyMapper;
 
+	@Resource
+	private BillTypeMapper billTypeMapper;
+
+	@Resource
+	private MyMapper mapper;
+
 	@Test
 	public void  test() {
-		Currency currency = new Currency();
-		currency = currencyMapper.selectByPrimaryKey("f4588cc0f91411e792c651ca02a8486f");
-		System.out.println(currency);
-		currency.setCurrencyName("哇哈哈");
-		currency.setGmtModified(new Date());
-		currencyMapper.updateByPrimaryKey(currency);
-		System.out.println(currency);
+		BillType billType = new BillType();
+		billType.setBillTypeName("3");
+		billType.setIsIncome(false);
+//		this.billTypeMapper.insert(billType);
+		this.mapper.insert(billType);
 	}
 
 }

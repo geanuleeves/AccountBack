@@ -5,62 +5,53 @@
       layout:decorator="admin/common/template">
 <body>
 <section id="main-content" layout:fragment="content">
-    <section class="wrapper" th:fragment="permission-section" id="permission-section">
+    <section class="wrapper" th:fragment="currency-section" id="currency-section">
         <div class="row">
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading" style="border-bottom:0px">
                         <div>
-                            <div style=" float: left;width: 120px"><a class="btn btn-compose" data-toggle="modal" href="#permission-model">添加权限</a></div>
-                            <div style=" float: right;"><input id="permission_input_search" onkeypress="if(event.keyCode==13) {search($(this).val())}" class="form-control search" name="keyword" placeholder="关键字搜索" type="text"></div>
+                            <div style=" float: left;width: 120px"><a class="btn btn-compose" data-toggle="modal" href="#currency-model">添加币种</a></div>
+                            <div style=" float: right;"><input id="currency_input_search" onkeypress="if(event.keyCode==13) {search($(this).val())}" class="form-control search" name="keyword" placeholder="关键字搜索" type="text"></div>
 
-                            <div class="modal fade" id="permission-model" tabindex="-1"
+                            <div class="modal fade" id="currency-model" tabindex="-1"
                                  role="dialog"
-                                 aria-labelledby="用户权限" aria-hidden="true">
+                                 aria-labelledby="币种类型" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">&times;
                                             </button>
-                                            <h4 class="modal-title">用户权限</h4>
+                                            <h4 class="modal-title">币种类型</h4>
                                         </div>
-                                        <div id="single-permission-model" class="modal-body" th:fragment="single-permission-model">
+                                        <div id="single-currency-model" class="modal-body" th:fragment="single-currency-model">
                                             <form class="form-horizontal" role="form" method="post"
-                                                  th:action="@{/admin/permission/update}">
-                                                <input id="permission_input_id" type="hidden" name="id" value="">
+                                                  th:action="@{/admin/currency/update}">
+                                                <input id="currency_input_id" type="hidden" name="id" value="">
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">名称</label>
+                                                    <label class="col-lg-2 control-label">币种</label>
                                                     <div class="col-lg-10">
-                                                        <input id="permission_input_name" value="" type="text"
+                                                        <input id="currency_input_name" value="" type="text"
                                                                class="form-control"
-                                                               name="name"
+                                                               name="currencyName"
                                                                placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">路径</label>
+                                                    <label class="col-lg-2 control-label">英文缩写</label>
                                                     <div class="col-lg-10">
-                                                        <input id="permission_input_permissionUrl" value="" type="text"
-                                                               name="permissionUrl" class="form-control"
+                                                        <input id="currency_input_abbreviation" value="" type="text"
+                                                               name="abbreviation" class="form-control"
                                                                placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-lg-2 control-label">方法</label>
+                                                    <label class="col-lg-2 control-label">币值（RMB）</label>
                                                     <div class="col-lg-10">
-                                                        <input id="permission_input_method" value="" type="text"
-                                                               name="method" class="form-control"
+                                                        <input id="currency_input_value" value="" type="text"
+                                                               name="currencyValue" class="form-control"
                                                                placeholder="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="col-lg-2 control-label">描述</label>
-                                                    <div class="col-lg-10">
-                                                        <textarea id="permission_textarea_description" value=""
-                                                               name="description" class="form-control"
-                                                                  placeholder="" rows="2">
-                                                        </textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -79,26 +70,24 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th><i class="icon-bullhorn"></i> 名称</th>
-                            <th><i class="icon-bookmark"></i> 路径</th>
-                            <th><i class="icon-bookmark"></i> 方法</th>
-                            <th class="hidden-phone"><i class="icon-question-sign"></i> 描述</th>
+                            <th><i class="icon-bullhorn"></i> 币种</th>
+                            <th><i class="icon-bullhorn"></i> 英文缩写 </th>
+                            <th><i class="icon-bullhorn"></i> 币值（RMB）</th>
                             <th><i class="icon-edit-sign"></i> 操作</th>
                         </tr>
                         </thead>
                         <tbody th:if="${result != null} ">
-                        <tr th:each="permission,iterStat:${result.list}">
+                        <tr th:each="currency,iterStat:${result.list}">
                             <td th:text="${iterStat.count}"></td>
-                            <td><span th:text="${permission.name}"></span></td>
-                            <td><span th:text="${permission.permissionUrl}"></span></td>
-                            <td><span th:text="${permission.method}"></span></td>
-                            <td class="hidden-phone"><span th:text="${permission.description}"></span></td>
+                            <td><span th:text="${currency.currencyName}"></span></td>
+                            <td><span th:text="${currency.abbreviation}"></span></td>
+                            <td><span th:text="${currency.currencyValue}"></span></td>
                             <td>
-                                <a th:value="${permission.id}" class="btn btn-primary btn-xs" data-toggle="modal"
-                                   href="#permission-model" th:onclick="'javascript:getPermissionById(\''+${permission.id}+'\');'"><i
+                                <a th:value="${currency.id}" class="btn btn-primary btn-xs" data-toggle="modal"
+                                   href="#currency-model" th:onclick="'javascript:getById(\''+${currency.id}+'\');'"><i
                                         class="icon-pencil"></i></a>
-                                <button id="permission-btn-delete" th:value="${permission.id}" class="btn btn-danger btn-xs"
-                                        th:onclick="'javascript:deletePermissionById(\''+${permission.id}+'\');'"><i
+                                <button th:value="${currency.id}" class="btn btn-danger btn-xs"
+                                        th:onclick="'javascript:deleteById(\''+${currency.id}+'\');'"><i
                                         class="icon-trash "></i></button>
                             </td>
                         </tr>
@@ -107,24 +96,23 @@
                 </section>
             </div>
         </div>
-        <!-- page end-->
 
         <nav aria-label="Page navigation" class="navbar navbar-default navbar-fixed-bottom"
              style="margin-left: 50%">
             <ul class="pagination" th:if="${result != null}">
                 <li th:disabled="${result.hasPreviousPage}">
                     <a href="#" aria-label="Previous"
-                       th:onclick="'javascript:getPermissionsByPages(\''+${result.prePage}+'\');'">
+                       th:onclick="'javascript:getByPages(\''+${result.prePage}+'\');'">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
                 <li th:each="page : ${#numbers.sequence(1,result.pages)}">
-                    <a href="#" th:onclick="'javascript:getPermissionsByPages(\''+${page}+'\');'"><span
+                    <a href="#" th:onclick="'javascript:getByPages(\''+${page}+'\');'"><span
                             th:text="${page}"></span></a>
                 </li>
                 <li th:disabled="${result.hasNextPage}">
                     <a href="#" aria-label="Next"
-                       th:onclick="'javascript:getPermissionsByPages(\''+${result.nextPage}+'\');'">
+                       th:onclick="'javascript:getByPages(\''+${result.nextPage}+'\');'">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
@@ -143,14 +131,14 @@
 
         function search(keyword) {
             //加载用户角色集合
-            axios.get('/admin/permission/getAll',{
+            axios.get('/admin/currency/all',{
                 params: {
                     keyword: keyword
                 }
             })
                 .then(function (response) {
                     if (response.status === 200) {
-                        $('#permission-section').replaceWith(response.data);
+                        $('#currency-section').replaceWith(response.data);
                     }
                 })
                 .catch(function (error) {
@@ -158,76 +146,74 @@
                 });
         }
 
-        let getPermissionsByPages = function (page) {
+        let getByPages = function (page) {
             //加载用户角色集合
-            axios.get('/admin/permission/getAll', {
+            axios.get('/admin/currency/all', {
                 params: {
                     page: page
                 }
             })
                 .then(function (response) {
-                    $('#permission-section').replaceWith(response.data);
+                    $('#currency-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let deletePermissionById = function (id) {
+        let deleteById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/permission/deleteById', {
+            axios.delete('/admin/currency/delete', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    $('#permission-section').replaceWith(response.data);
+                    $('#currency-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let updatePermissionById = function (id) {
+        let updateById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/permission/update', {
+            axios.post('/admin/currency/update', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    $('#permission-section').replaceWith(response.data);
+                    $('#currency-section').replaceWith(response.data);
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
         };
 
-        let getPermissionById = function (id) {
+        let getById = function (id) {
             if (id == null || id === '') {
                 return false;
             }
-            axios.get('/admin/permission/getPermissionById', {
+            axios.get('/admin/currency/get', {
                 params: {
                     id: id
                 }
             })
                 .then(function (response) {
-                    let permission = response.data.data;
-                    let permission_input_id = $('#permission_input_id');
-                    let permission_input_name = $('#permission_input_name');
-                    let permission_input_permissionUrl = $('#permission_input_permissionUrl');
-                    let permission_textarea_description = $('#permission_textarea_description');
-                    let permission_input_method = $('#permission_input_method');
-                    permission_input_id.val(permission.id);
-                    permission_input_name.val(permission.name);
-                    permission_input_permissionUrl.val(permission.permissionUrl);
-                    permission_input_method.val(permission.method);
-                    permission_textarea_description.val(permission.description);
+                    let currency = response.data.data;
+                    let currency_input_id = $('#currency_input_id');
+                    let currency_input_name = $('#currency_input_name');
+                    let currency_input_abbreviation = $('#currency_input_abbreviation');
+                    let currency_input_value = $('#currency_input_value');
+                    currency_input_id.val(currency.id);
+                    currency_input_name.val(currency.currencyName);
+                    currency_input_abbreviation.val(currency.abbreviation);
+                    currency_input_value.val(currency.currencyValue);
                 })
                 .catch(function (error) {
                     console.log(error);
